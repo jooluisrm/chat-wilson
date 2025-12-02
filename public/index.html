@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar com lista de usuários -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h2>Conversas</h2>
+                <div style="display: flex; gap: 5px; margin-bottom: 10px;">
+                    <button class="btn-create-room" id="createRoomBtn" style="flex: 1; padding: 8px; background: #25d366; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                        <i class="fas fa-plus"></i> Criar Sala
+                    </button>
+                    <button class="btn-list-rooms" id="listRoomsBtn" style="flex: 1; padding: 8px; background: #667781; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 12px;">
+                        <i class="fas fa-list"></i> Salas
+                    </button>
+                </div>
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Pesquisar conversas...">
+                </div>
+            </div>
+            
+            <div class="users-list" id="usersList">
+                <!-- Lista será renderizada pelo JavaScript -->
+            </div>
+        </div>
+
+        <!-- Área do chat -->
+        <div class="chat-area">
+            <div class="chat-header">
+                <div class="chat-user-info">
+                    <div class="chat-avatar">
+                        <img src="https://via.placeholder.com/40/25D366/FFFFFF?text=U" alt="Avatar">
+                    </div>
+                    <div class="chat-user-details">
+                        <h3>Anônimo</h3>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="action-btn" id="leaveRoomBtn" style="display: none;" title="Sair da sala"><i class="fas fa-sign-out-alt"></i></button>
+                    <button class="action-btn" id="changeNameBtn"><i class="fas fa-edit"></i></button>
+                </div>
+            </div>
+                <ul class="chat-messages" id="chatMessages"> </ul>    
+          
+            <div class="chat-input">
+                <form id="form" class="input-container">
+                    <input type="text" placeholder="Digite uma mensagem..." id="messageInput">
+                    <button class="send-btn" id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para editar perfil -->
+    <div id="editProfileModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Editar Perfil</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="editProfileForm">
+                    <div class="form-group">
+                        <label for="editUserName">Nome:</label>
+                        <input type="text" id="editUserName" placeholder="Digite seu nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editUserAvatar">Avatar (URL da imagem):</label>
+                        <input type="url" id="editUserAvatar" placeholder="https://exemplo.com/imagem.jpg">
+                        <small>Cole o link da imagem que deseja usar como avatar</small>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" id="cancelEditBtn">Cancelar</button>
+                        <button type="submit" class="btn-save">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para criar sala -->
+    <div id="createRoomModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Criar Nova Sala</h2>
+                <span class="modal-close" id="closeCreateRoomModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="createRoomForm">
+                    <div class="form-group">
+                        <label for="roomName">Nome da Sala:</label>
+                        <input type="text" id="roomName" placeholder="Digite o nome da sala" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" id="cancelCreateRoomBtn">Cancelar</button>
+                        <button type="submit" class="btn-save">Criar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal para listar salas -->
+    <div id="listRoomsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Salas Disponíveis</h2>
+                <span class="modal-close" id="closeListRoomsModal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div id="roomsListContainer" style="max-height: 400px; overflow-y: auto;">
+                    <!-- Lista de salas será renderizada aqui -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script src="./js/cliente.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>    
+<script src="./js/script.js"></script>
+    
+</html>

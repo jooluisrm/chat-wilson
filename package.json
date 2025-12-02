@@ -1,0 +1,17 @@
+{
+  "name": "testesocket",
+  "version": "1.0.0",
+  
+  "scripts": {
+    "server": "node ./src/server.js",
+    "teste": "node ./src/teste.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "express": "^5.1.0",
+    "socket.io": "^4.8.1"
+  }
+}
